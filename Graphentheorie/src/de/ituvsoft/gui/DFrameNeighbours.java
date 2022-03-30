@@ -14,7 +14,7 @@ import de.ituvsoft.graph.DGraph;
 import de.ituvsoft.graph.DNode;
 
 
-/*
+/* 
  * Ein Code Snippet mit folgendem Sinn:
  * Wenn man in die Box A z.B. ein B einträgt, dann soll in die Box
  * B auch ein A eingetragen werden.
@@ -23,7 +23,7 @@ import de.ituvsoft.graph.DNode;
  * Zur Implementierung in "Anwendung zur Graphentheorie" vorgesehen
  * 
  * 
- * ACHTUNG: Abgewandelte Version als im Snippet
+ * ACHTUNG: Andere Version als im Snippet
  */
 public class DFrameNeighbours extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -31,8 +31,8 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 	private char maxC;
 	private int max;
 	private DGraph graph;
-	private DNode[] arrNodes;
 	
+	private DNode[] arrNodes;
 	private JTextField[] textFields;
 	private JLabel[] textLabels;
 	private JButton finish;

@@ -17,9 +17,6 @@ import de.ituvsoft.utils.DModes;
 public class DCanvas extends Canvas implements MouseListener{
 	private static final long serialVersionUID = 1L;
 
-	
-	//private Map<DNode, List<DNode>> nodes;
-	private List<DNode> tempList;
 	private int currentSelection;
 	
 	DCanvas(){
@@ -36,30 +33,25 @@ public class DCanvas extends Canvas implements MouseListener{
 		drawGraph(g);
 	}
 	
+	
 	public void drawGraph(Graphics g) {
-		if(DGraph.nodes != null)
+		if(DGraph.arrAllNodes != null)
 		{
-			
-			// draw nodes
 			g.setColor(Color.white);
-		    for (DNode key : DGraph.nodes.keySet()){
-		        g.fillOval(key.pos.getX(), key.pos.getY(), DKonstanten.NODE_WIDTH, DKonstanten.NODE_HEIGHT);
-		        drawLetters(g, key.getLetter());
+		    for(int i = 0; i < DGraph.arrAllNodes.size(); i++)
+		    {
+		    	g.fillOval(DGraph.arrAllNodes.get(i).pos.getX(), DGraph.arrAllNodes.get(i).pos.getY(), DKonstanten.NODE_WIDTH, DKonstanten.NODE_HEIGHT);
+		    	drawLetters(g, DGraph.arrAllNodes.get(i).letter);
 		    }
 		    
-		    
-		    // draw kanten
-		    for(DNode key : DGraph.nodes.keySet()) {
-		    	tempList = DGraph.nodes.get(key);
-		    	for(int n = 0; n < tempList.size(); n++) {
-		    		g.drawLine(key.pos.getX() + DKonstanten.NODE_WIDTH / 2, key.pos.getY() + DKonstanten.NODE_HEIGHT / 2, tempList.get(n).pos.getX() + DKonstanten.NODE_WIDTH / 2, tempList.get(n).pos.getY() + DKonstanten.NODE_HEIGHT / 2);
-		    	}
-		    }
+		    for(int i = 0; i < DGraph.arrAllNodes.size(); i++)
+		    	for(int n = 0; n < DGraph.arrAllNodes.get(i).size(); n++)
+		    		g.drawLine(DGraph.arrAllNodes.get(i).pos.getX() + DKonstanten.NODE_WIDTH / 2, DGraph.arrAllNodes.get(i).pos.getY() + DKonstanten.NODE_HEIGHT / 2, DGraph.arrAllNodes.get(i).get(n).pos.getX() + DKonstanten.NODE_WIDTH / 2 , DGraph.arrAllNodes.get(i).get(n).pos.getY() + DKonstanten.NODE_WIDTH / 2);
 		}
 	}
 	
 	
-	
+	// TODO verallgemeinern
 	public void drawLetters(Graphics g, char letter) {
 		switch(letter){
 			case 'A':
@@ -89,17 +81,19 @@ public class DCanvas extends Canvas implements MouseListener{
 		}
 	}
 
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(DFrame.mode == DModes.coordinate_selection)
 		{
-			if(currentSelection <= DGraph.nodes.size())
+			if(currentSelection <= DGraph.arrAllNodes.size())
 			{
 				//TODO koordinaten setzen
 				
@@ -112,18 +106,21 @@ public class DCanvas extends Canvas implements MouseListener{
 		
 	}
 
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

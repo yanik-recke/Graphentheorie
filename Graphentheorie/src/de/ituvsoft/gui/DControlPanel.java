@@ -67,28 +67,26 @@ public class DControlPanel extends JPanel implements ActionListener{
 	
 	
 	public void enterGraphManually() {
-		graph = new DGraph();
-		graph.resetGraph();
+		if(graph != null)
+			graph.resetGraph();
 		
 		try {
 			String sNodes = JOptionPane.showInputDialog("How many nodes do you want to add?");
 			int nodes = Integer.parseInt(sNodes);
+			
+			graph = new DGraph(nodes);
 
-			int name = 65;			// 65 -> A
 			//int nodeCounter = 0;
 			arrNodes = new DNode[nodes];		// Node A an 0ter Stelle, Node B an 1ter Stelle, usw.
-		
-		
-			// adding the nodes to the graph
+			
+			// Array mit Nodes befüllen
+			char c = 'A';
 			for(int i = 0; i < nodes; i++)
 			{
-				arrNodes[i] = new DNode((char) name, i);
-				graph.addNode(arrNodes[i]);
-				name++;
+				arrNodes[i] = new DNode(c, i);
+				c++;
 			}
-		
-			
-			name = 65;		// -> resetting name to A (65)
+				
 			if(nodes == 1)
 				System.out.println("No adjacents for one node");
 			else
