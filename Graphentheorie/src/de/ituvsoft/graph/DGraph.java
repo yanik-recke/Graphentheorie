@@ -25,11 +25,19 @@ public class DGraph {
 	
 	// TODO add distance for weighted graph
 	public void createConnection(DNode a, DNode b) {
-		if(!nodes.get(a).contains(b) && !nodes.get(b).contains(a))
-		{
+		if(!nodes.get(a).contains(b))
 			nodes.get(a).add(b);
+		
+		if(!nodes.get(b).contains(a))
 			nodes.get(b).add(a);
-		}
+	}
+	
+	
+	public boolean checkIfConnected(DNode a, DNode b) {
+		if(nodes.get(a).contains(b) && nodes.get(b).contains(a))
+			return true;
+		
+		return false;
 	}
 	
 	

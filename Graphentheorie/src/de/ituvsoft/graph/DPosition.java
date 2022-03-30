@@ -1,5 +1,10 @@
 package de.ituvsoft.graph;
 
+
+/*
+ * Jede Position hat feste Koordinaten auf dem Canvas.
+ * Jede Node hat eine Position.
+ */
 public class DPosition {
 	int x, y;
 	

@@ -11,6 +11,8 @@ import de.ituvsoft.graph.DNode;
 import de.ituvsoft.main.DKonstanten;
 
 public class DCanvas extends Canvas {
+	private static final long serialVersionUID = 1L;
+	
 	//private Map<DNode, List<DNode>> nodes;
 	private List<DNode> tempList;
 	
@@ -29,8 +31,8 @@ public class DCanvas extends Canvas {
 	public void drawGraph(Graphics g) {
 		if(DGraph.nodes != null)
 		{
-			int counter = 65;
 			
+			// draw nodes
 			g.setColor(Color.white);
 		    for (DNode key : DGraph.nodes.keySet()){
 		        g.fillOval(key.pos.getX(), key.pos.getY(), DKonstanten.NODE_WIDTH, DKonstanten.NODE_HEIGHT);
@@ -38,6 +40,7 @@ public class DCanvas extends Canvas {
 		    }
 		    
 		    
+		    // draw kanten
 		    for(DNode key : DGraph.nodes.keySet()) {
 		    	tempList = DGraph.nodes.get(key);
 		    	for(int n = 0; n < tempList.size(); n++) {

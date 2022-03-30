@@ -14,9 +14,15 @@ import de.ituvsoft.main.DController;
 
 
 public class DControlPanel extends JPanel implements ActionListener{
+	private static final long serialVersionUID = 1L;
+	
 	private JButton bDrawGraph, bLoadNewGraph, bEnterNewGraph;
 	private DGraph graph;
-	//DNode arrNodes[];
+	private DFrameNeighbours inputNeighbours;
+	private DNode[] arrNodes;
+	
+	public static volatile boolean waiting;
+	
 	
 	DControlPanel(){
 		
@@ -46,6 +52,12 @@ public class DControlPanel extends JPanel implements ActionListener{
 			enterGraphManually();
 		}
 		
+		if(e.getSource() == bLoadNewGraph) {
+			//TODO load file
+			System.out.println(graph.checkIfConnected(arrNodes[2], arrNodes[0]));
+			System.out.println(graph.checkIfConnected(arrNodes[0], arrNodes[2]));
+		}
+		
 		if(e.getSource() == bDrawGraph) {
 			DController.callRepaint();
 		}
@@ -55,16 +67,17 @@ public class DControlPanel extends JPanel implements ActionListener{
 	
 	public void enterGraphManually() {
 		graph = new DGraph();
+		graph.resetGraph();
 		
 		try {
-			boolean done = false;
 			String sNodes = JOptionPane.showInputDialog("How many nodes do you want to add?");
 			int nodes = Integer.parseInt(sNodes);
-			int name = 65;
+			int name = 65;			// 65 -> A
 			//int nodeCounter = 0;
-			DNode[] arrNodes = new DNode[nodes];		// Node A an 0ter Stelle, Node B an 1ter Stelle, usw.
+			arrNodes = new DNode[nodes];		// Node A an 0ter Stelle, Node B an 1ter Stelle, usw.
 		
 		
+			// adding the nodes to the graph
 			for(int i = 0; i < nodes; i++)
 			{
 				arrNodes[i] = new DNode((char) name, i);
@@ -72,74 +85,10 @@ public class DControlPanel extends JPanel implements ActionListener{
 				name++;
 			}
 		
-			name = 65;
-			for(int i = 0; i < nodes; i++)
-			{
-				String sNeighboursNum = JOptionPane.showInputDialog("How many neighbours does " + (char) name + " have? Up to " + (nodes - 1) + " is allowed.");
-				int neighboursNum= Integer.parseInt(sNeighboursNum);
-				for(int n = 0; n < neighboursNum; n++)
-			{
-				while(!done) 
-				{
-					String sNeighbour = JOptionPane.showInputDialog("[A, B, C,..] Enter " + (n + 1)  + ". neighbour");
-		
-					switch(sNeighbour.charAt(0)) {
-						case 'A' : 
-							if(i != 0)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[0]);
-							}
-							break;
-					
-						case 'B' : 
-							if(i != 1)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[1]);
-							}
-							break;
-						
-						case 'C' : 
-							if(i != 2)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[2]);
-							}
-							break;
-						
-						case 'D' : 
-							if(i != 3)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[3]);
-							}
-							break;
-						
-						case 'E' : 
-							if(i != 4)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[4]);
-							}
-							break;
-						
-						case 'F' : 
-							if(i != 5)
-							{
-								done = true;
-								graph.createConnection(arrNodes[i], arrNodes[5]);
-							}
-							break;
-						}
-					
-						if(!done)
-							System.out.println("false input. retry.");
-					}
-					done = false;
-				}
-				name++;
-			}
+			
+			name = 65;		// -> resetting name to A (65)
+			inputNeighbours = new DFrameNeighbours(nodes, graph, arrNodes);
+
 		} 
 		catch (Exception ex)
 		{
