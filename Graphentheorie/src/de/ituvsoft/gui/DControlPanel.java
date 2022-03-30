@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import de.ituvsoft.graph.*;
+import de.ituvsoft.graph.DGraph;
+import de.ituvsoft.graph.DNode;
 import de.ituvsoft.main.DController;
 
 
@@ -18,7 +20,6 @@ public class DControlPanel extends JPanel implements ActionListener{
 	
 	private JButton bDrawGraph, bLoadNewGraph, bEnterNewGraph;
 	private DGraph graph;
-	private DFrameNeighbours inputNeighbours;
 	private DNode[] arrNodes;
 	
 	public static volatile boolean waiting;
@@ -72,6 +73,7 @@ public class DControlPanel extends JPanel implements ActionListener{
 		try {
 			String sNodes = JOptionPane.showInputDialog("How many nodes do you want to add?");
 			int nodes = Integer.parseInt(sNodes);
+
 			int name = 65;			// 65 -> A
 			//int nodeCounter = 0;
 			arrNodes = new DNode[nodes];		// Node A an 0ter Stelle, Node B an 1ter Stelle, usw.
@@ -90,7 +92,7 @@ public class DControlPanel extends JPanel implements ActionListener{
 			if(nodes == 1)
 				System.out.println("No adjacents for one node");
 			else
-				inputNeighbours = new DFrameNeighbours(nodes, graph, arrNodes);
+				new DFrameNeighbours(nodes, graph, arrNodes);
 
 		} 
 		catch (Exception ex)

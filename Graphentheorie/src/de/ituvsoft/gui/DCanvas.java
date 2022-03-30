@@ -4,22 +4,30 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import de.ituvsoft.graph.DGraph;
 import de.ituvsoft.graph.DNode;
 import de.ituvsoft.main.DKonstanten;
+import de.ituvsoft.utils.DModes;
 
-public class DCanvas extends Canvas {
+public class DCanvas extends Canvas implements MouseListener{
 	private static final long serialVersionUID = 1L;
+
 	
 	//private Map<DNode, List<DNode>> nodes;
 	private List<DNode> tempList;
+	private int currentSelection;
 	
 	DCanvas(){
 		this.setPreferredSize(new Dimension(500, DKonstanten.CANVAS_WIDTH));
 		this.setBackground(Color.gray);
 		this.setVisible(true);
+		
+		this.currentSelection = 0;
 	}
 	
 	@Override
@@ -79,6 +87,47 @@ public class DCanvas extends Canvas {
 				break;
 				
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if(DFrame.mode == DModes.coordinate_selection)
+		{
+			if(currentSelection <= DGraph.nodes.size())
+			{
+				//TODO koordinaten setzen
+				
+			}
+			else
+			{
+				currentSelection = 0;
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class DGraph {
 	public static Map<DNode, List<DNode>> nodes;
+	public static ArrayList<DNode>[] arrAllNodes;
 
 	
 	public DGraph() {
