@@ -87,7 +87,10 @@ public class DControlPanel extends JPanel implements ActionListener{
 		
 			
 			name = 65;		// -> resetting name to A (65)
-			inputNeighbours = new DFrameNeighbours(nodes, graph, arrNodes);
+			if(nodes == 1)
+				System.out.println("No adjacents for one node");
+			else
+				inputNeighbours = new DFrameNeighbours(nodes, graph, arrNodes);
 
 		} 
 		catch (Exception ex)

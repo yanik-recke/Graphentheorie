@@ -36,6 +36,7 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 	private JTextField[] textFields;
 	private JLabel[] textLabels;
 	private JButton finish;
+	private JButton close;
 	
 
 	public DFrameNeighbours(int max, DGraph graph, DNode[] arrNodes) {
@@ -68,7 +69,11 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		this.setPreferredSize(new Dimension(max * 110, 140));
+		
+		if(max <= 2)
+			this.setPreferredSize(new Dimension(max * 120, 140));
+		else
+			this.setPreferredSize(new Dimension(max * 110, 140));
 		
 		// TODO change so it does not leave ~60 slots empty
 		textFields = new JTextField[maxC + 1];
@@ -97,6 +102,12 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		finish.setVisible(true);
 		finish.addActionListener(this);
 		this.add(finish);
+		
+		close = new JButton("Close");
+		close.setPreferredSize(new Dimension(100,35));
+		close.setVisible(true);
+		close.addActionListener(this);
+		this.add(close);
 		
 		this.pack();
 		this.setVisible(true);
@@ -155,20 +166,14 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 					inputCorrect = false;
 			
 			if(inputCorrect)
-			{
-				// TODO Übertragen der Inputs in String Array
 				fillGraph();
-				try {
-					//Thread.sleep(500);		// simulated delay
-				} catch (Exception e2) {
-					;
-				}
-				//this.dispose();
-				
-			}
 			else
 				System.out.println("Konnte nicht beenden, Fehler in einer der Textboxen");
 		}
+			
+		if(e.getSource() == close)
+			this.dispose();
+		
 			
 
 		// Am Ende prüfen, außerhalb, da sonst Dopplug
