@@ -2,6 +2,7 @@ package de.ituvsoft.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import de.ituvsoft.main.DController;
 public class DControlPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
-	private JButton bDrawGraph, bLoadNewGraph, bEnterNewGraph;
+	public JButton bChangeMode, bDrawGraph, bLoadNewGraph, bEnterNewGraph;
 	private DGraph graph;
-	private DNode[] arrNodes;
+	public static DNode[] arrNodes;
 	
 	public static volatile boolean waiting;
 	
@@ -29,20 +30,31 @@ public class DControlPanel extends JPanel implements ActionListener{
 		
 		this.setPreferredSize(new Dimension(150, 500));
 		this.setBackground(Color.gray);
+		this.setFocusable(false);
+		
+		//TODO implement functionality
+		bChangeMode = new JButton("Change to Point & Click mode");
+		bChangeMode.setPreferredSize(new Dimension(125, 50));
+		bChangeMode.addActionListener(this);
+		bChangeMode.setFocusable(false);
+		this.add(bChangeMode);
 		
 		bEnterNewGraph = new JButton("Enter by hand");
 		bEnterNewGraph.setPreferredSize(new Dimension(125,50));
 		bEnterNewGraph.addActionListener(this);
+		bEnterNewGraph.setFocusable(false);
 		this.add(bEnterNewGraph);
 		
 		bLoadNewGraph = new JButton("Load new");
 		bLoadNewGraph.setPreferredSize(new Dimension(125, 50));
 		bLoadNewGraph.addActionListener(this);
+		bLoadNewGraph.setFocusable(false);
 		this.add(bLoadNewGraph);
 		
 		bDrawGraph = new JButton("Draw");
 		bDrawGraph.setPreferredSize(new Dimension(125,50));
 		bDrawGraph.addActionListener(this);
+		bDrawGraph.setFocusable(false);
 		this.add(bDrawGraph);
 		
 	}
@@ -55,14 +67,28 @@ public class DControlPanel extends JPanel implements ActionListener{
 		
 		if(e.getSource() == bLoadNewGraph) {
 			//TODO load file
-			System.out.println(graph.checkIfConnected(arrNodes[2], arrNodes[0]));
-			System.out.println(graph.checkIfConnected(arrNodes[0], arrNodes[2]));
+			//System.out.println(graph.checkIfConnected(arrNodes[2], arrNodes[0]));
+			//System.out.println(graph.checkIfConnected(arrNodes[0], arrNodes[2]));
+			System.out.println(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
 		}
 		
 		if(e.getSource() == bDrawGraph) {
 			DController.callRepaint();
 		}
 		
+		if(e.getSource() == bChangeMode)
+			if((graph != null) && bChangeMode.getText().contains("Normal"))
+			{
+				DController.changeMode(0);
+				bChangeMode.setText("Change to Point & Click mode");
+			}
+			else if(graph != null)
+			{
+				DController.changeMode(1);
+				bChangeMode.setText("Change to Normal mode");
+			}
+			else
+				System.out.println("You have to first enter at least one node");
 	}
 	
 	
@@ -95,7 +121,9 @@ public class DControlPanel extends JPanel implements ActionListener{
 		} 
 		catch (Exception ex)
 		{
-			graph.resetGraph();
+			if(graph != null)
+				graph.resetGraph();
+			
 			ex.printStackTrace();
 			System.out.println("Something went wrong. Graph was cleared. Try again.");
 		}

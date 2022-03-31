@@ -8,17 +8,14 @@ import de.ituvsoft.utils.DModes;
 
 public class DFrame extends JFrame {
 	DCanvas canvas;
-	DControlPanel panel;
-	public static DModes mode;
+	public DControlPanel panel;
 	
 	
 	public DFrame(){
-		//this.setPreferredSize(new Dimension());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Anwendung zur Graphentheorie");
 		this.setLayout(new FlowLayout());
-		
-		mode = DModes.normal;
+		this.setFocusable(true);
+		this.requestFocus();
 		
 		canvas = new DCanvas();
 		this.add(canvas);
@@ -28,11 +25,13 @@ public class DFrame extends JFrame {
 				
 		this.setVisible(true);
 		this.pack();
+		canvas.requestFocus();
 	}
 	
 	
 	public void callRepaint() {
 		canvas.repaint();
 	}
+	
 	
 }

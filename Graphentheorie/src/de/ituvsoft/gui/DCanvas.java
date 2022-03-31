@@ -4,13 +4,17 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.KeyboardFocusManager;
 import java.awt.MouseInfo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
+
+import javax.swing.Timer;
 
 import de.ituvsoft.graph.DGraph;
-import de.ituvsoft.graph.DNode;
+import de.ituvsoft.main.DController;
 import de.ituvsoft.main.DKonstanten;
 import de.ituvsoft.utils.DModes;
 
@@ -23,7 +27,9 @@ public class DCanvas extends Canvas implements MouseListener{
 		this.setPreferredSize(new Dimension(500, DKonstanten.CANVAS_WIDTH));
 		this.setBackground(Color.gray);
 		this.setVisible(true);
-		
+		this.setFocusable(true);
+		this.requestFocus();
+		this.addMouseListener(this);
 		this.currentSelection = 0;
 	}
 	
@@ -54,28 +60,28 @@ public class DCanvas extends Canvas implements MouseListener{
 	// TODO verallgemeinern
 	public void drawLetters(Graphics g, char letter) {
 		switch(letter){
-			case 'A':
-				g.drawString("A", 40, 250);
+			case 'A': //-10 =
+				g.drawString("A", DGraph.arrAllNodes.get(0).pos.getX() - 10, DGraph.arrAllNodes.get(0).pos.getY());
 				break;
 				
-			case 'B':
-				g.drawString("B", 140, 365);
+			case 'B': //-10 +15
+				g.drawString("B", DGraph.arrAllNodes.get(1).pos.getX() - 10, DGraph.arrAllNodes.get(1).pos.getY() + 15);
 				break;
 				
-			case 'C':
-				g.drawString("C", 290, 365);
+			case 'C': //+10 -15 
+				g.drawString("C", DGraph.arrAllNodes.get(2).pos.getX() + 13, DGraph.arrAllNodes.get(2).pos.getY() + 15);
 				break;
 				
-			case 'D':
-				g.drawString("D", 410, 248);
+			case 'D': //-10 -2
+				g.drawString("D",  DGraph.arrAllNodes.get(3).pos.getX() - 9, DGraph.arrAllNodes.get(3).pos.getY() - 2);
 				break;
 				
-			case 'E':
-				g.drawString("E", 313, 155);
+			case 'E': //-13 +5
+				g.drawString("E", DGraph.arrAllNodes.get(4).pos.getX() - 13, DGraph.arrAllNodes.get(4).pos.getY() + 5);
 				break;
 				
-			case 'F':
-				g.drawString("F", 140, 155);
+			case 'F': //+10 +5
+				g.drawString("F",  DGraph.arrAllNodes.get(5).pos.getX() - 10, DGraph.arrAllNodes.get(5).pos.getY() + 5);
 				break;
 				
 		}
@@ -85,32 +91,44 @@ public class DCanvas extends Canvas implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(DFrame.mode == DModes.coordinate_selection)
+		if(DController.mode == DModes.coordinate_selection)
 		{
-			if(currentSelection <= DGraph.arrAllNodes.size())
+			System.out.println("changing coordinates");
+			if(currentSelection < DGraph.arrAllNodes.size() - 1)
 			{
-				//TODO koordinaten setzen
+				DGraph.arrAllNodes.get(currentSelection).pos.setX((int) MouseInfo.getPointerInfo().getLocation().getX() - 10);
+				DGraph.arrAllNodes.get(currentSelection).pos.setY((int) MouseInfo.getPointerInfo().getLocation().getY() - 30);
 				
+				DControlPanel.arrNodes[currentSelection].pos.setX((int) MouseInfo.getPointerInfo().getLocation().getX() - 10);
+				DControlPanel.arrNodes[currentSelection].pos.setY((int) MouseInfo.getPointerInfo().getLocation().getY() - 30);
+				currentSelection++;
+				repaint();
 			}
 			else
 			{
+				DGraph.arrAllNodes.get(currentSelection).pos.setX((int) MouseInfo.getPointerInfo().getLocation().getX() - 10);
+				DGraph.arrAllNodes.get(currentSelection).pos.setY((int) MouseInfo.getPointerInfo().getLocation().getY() - 30);
+				
+				DControlPanel.arrNodes[currentSelection].pos.setX((int) MouseInfo.getPointerInfo().getLocation().getX() - 10);
+				DControlPanel.arrNodes[currentSelection].pos.setY((int) MouseInfo.getPointerInfo().getLocation().getY() - 30);
 				currentSelection = 0;
+				repaint();
 			}
 		}
 		
+		System.out.println(MouseInfo.getPointerInfo().getLocation().getX());
+		System.out.println((int) MouseInfo.getPointerInfo().getLocation().getX());
 	}
 
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	

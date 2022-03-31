@@ -2,6 +2,7 @@ package de.ituvsoft.gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -69,6 +70,7 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
+		this.setFocusable(false);
 		
 		if(max <= 2)
 			this.setPreferredSize(new Dimension(max * 120, 140));
@@ -86,6 +88,7 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		{
 			textLabels[i] = new JLabel("Neighbours of " + ch);
 			textLabels[i].setPreferredSize(new Dimension(100, 20));
+			textLabels[i].setFocusable(false);
 			this.add(textLabels[i]);
 			ch++;
 		}
@@ -101,12 +104,14 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		finish.setPreferredSize(new Dimension(100, 35));
 		finish.setVisible(true);
 		finish.addActionListener(this);
+		finish.setFocusable(false);
 		this.add(finish);
 		
 		close = new JButton("Close");
 		close.setPreferredSize(new Dimension(100,35));
 		close.setVisible(true);
 		close.addActionListener(this);
+		close.setFocusable(false);
 		this.add(close);
 		
 		this.pack();
