@@ -1,11 +1,11 @@
-package de.ituvsoft.utils;
+package de.yanik.utils;
 
 import java.util.ArrayList;
 
-import de.ituvsoft.graph.DNode;
-import de.ituvsoft.graph.DPosition;
+import de.yanik.graph.DNode;
+import de.yanik.graph.DPosition;
 
-public class NodeList extends ArrayList<DNode>{
+public class DNodeList extends ArrayList<DNode>{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -15,7 +15,7 @@ public class NodeList extends ArrayList<DNode>{
 	
 	public char letter;
 	
-	public NodeList(char letter, int pos){
+	public DNodeList(char letter, int pos){
 		this.pos = new DPosition(pos);
 		this.letter = letter;
 	}

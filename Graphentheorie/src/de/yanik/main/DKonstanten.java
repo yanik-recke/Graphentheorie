@@ -1,4 +1,4 @@
-package de.ituvsoft.main;
+package de.yanik.main;
 
 public class DKonstanten {
 	public static final int FRAME_HEIGHT = 500;

@@ -1,4 +1,4 @@
-package de.ituvsoft.gui;
+package de.yanik.gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import de.ituvsoft.graph.DGraph;
-import de.ituvsoft.graph.DNode;
+import de.yanik.graph.DGraph;
+import de.yanik.graph.DNode;
 
 
 /* 
@@ -67,7 +67,6 @@ public class DFrameNeighbours extends JFrame implements ActionListener {
 		
 		this.setLayout(new FlowLayout());
 		this.setTitle("Enter neighbours");
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setFocusable(false);

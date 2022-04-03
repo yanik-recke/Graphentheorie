@@ -1,4 +1,4 @@
-package de.ituvsoft.graph;
+package de.yanik.graph;
 
 
 /*

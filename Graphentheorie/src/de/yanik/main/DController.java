@@ -1,9 +1,9 @@
-package de.ituvsoft.main;
+package de.yanik.main;
 
 import java.awt.KeyboardFocusManager;
 
-import de.ituvsoft.gui.DFrame;
-import de.ituvsoft.utils.DModes;
+import de.yanik.gui.DFrame;
+import de.yanik.utils.DModes;
 
 public class DController {
 	static DFrame frame;

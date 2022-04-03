@@ -1,10 +1,10 @@
-package de.ituvsoft.gui;
+package de.yanik.gui;
 
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
-import de.ituvsoft.utils.DModes;
+import de.yanik.utils.DModes;
 
 public class DFrame extends JFrame {
 	DCanvas canvas;
